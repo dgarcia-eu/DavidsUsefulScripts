@@ -83,7 +83,6 @@ def main():
 												if sizesdic.get("Small",-1) != -1:
 													originalurl =  sizesdic.get("Small")
 
-									photosfile.write(photoid + "\t" + owner + "\t" + originalurl+ "\t" + str(len(comments)) + "\t" + str(tsn) +"\n")												
 
 									i = 0	
 									for child in comments.iter():
@@ -94,6 +93,7 @@ def main():
 											date = comments[i].get("datecreate")
 											i = i+1
 											commentsfile.write(commentid + "\t" + photoid + "\t" + author + "\t" + date + "\t\"" + text + "\"\n")
+								photosfile.write(photoid + "\t" + owner + "\t" + originalurl+ "\t" + str(len(comments)) + "\t" + str(tsn) +"\n")												
 
 							except:
 								print "missing photo " + photoid
