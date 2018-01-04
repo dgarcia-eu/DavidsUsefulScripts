@@ -66,24 +66,6 @@ def main():
 								tsn = int(info[0].get("dateuploaded"))
 			
 								if len(comments) > 0 :
-									sizes = flickr.photos.getSizes(photo_id = photoid)
-									sizesdic = dict()
-									for child in sizes.iter() :
-										if child.tag == "size":
-											sizesdic[child.get("label")] = child.get("url")
-									if sizesdic.get("Original",-1) != -1:
-										originalurl =  sizesdic.get("Original")
-									else:
-										if sizesdic.get("Large",-1) != -1:
-											originalurl =  sizesdic.get("Large")
-										else:
-											if sizesdic.get("Medium",-1) != -1:
-												originalurl =  sizesdic.get("Medium")
-											else:
-												if sizesdic.get("Small",-1) != -1:
-													originalurl =  sizesdic.get("Small")
-
-
 									i = 0	
 									for child in comments.iter():
 										if child.tag == 'comment':
@@ -93,7 +75,26 @@ def main():
 											date = comments[i].get("datecreate")
 											i = i+1
 											commentsfile.write(commentid + "\t" + photoid + "\t" + author + "\t" + date + "\t\"" + text + "\"\n")
+
+								sizes = flickr.photos.getSizes(photo_id = photoid)
+								sizesdic = dict()
+								for child in sizes.iter() :
+									if child.tag == "size":
+										sizesdic[child.get("label")] = child.get("url")
+								if sizesdic.get("Original",-1) != -1:
+									originalurl =  sizesdic.get("Original")
+								else:
+									if sizesdic.get("Large",-1) != -1:
+										originalurl =  sizesdic.get("Large")
+									else:
+										if sizesdic.get("Medium",-1) != -1:
+											originalurl =  sizesdic.get("Medium")
+										else:
+											if sizesdic.get("Small",-1) != -1:
+												originalurl =  sizesdic.get("Small")
+
 								photosfile.write(photoid + "\t" + owner + "\t" + originalurl+ "\t" + str(len(comments)) + "\t" + str(tsn) +"\n")												
+								print(photoid + "\t" + owner + "\t" + originalurl+ "\t" + str(len(comments)) + "\t" + str(tsn) +"\n")
 
 							except:
 								print "missing photo " + photoid
