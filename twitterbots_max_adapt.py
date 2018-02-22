@@ -18,10 +18,10 @@ twitter_app_auth = {
 bom = botometer.Botometer(wait_on_ratelimit=True, mashape_key=mashape_key, **twitter_app_auth)
 
 # provide file that contains one twitter userid per line
-finname = "/home/mpellert/bots/ensample.old"
+finname = ""
 
 # name of file to write output to
-foutname = "/home/mpellert/bots/ensample.old_checked"
+foutname = ""
 
 
 print("all set")
