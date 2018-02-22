@@ -8,7 +8,6 @@ reload(sys)
 sys.setdefaultencoding('utf-8')
 
 auth = tweepy.OAuthHandler(str(sys.argv[2]),str(sys.argv[3]))
-#"BkAI8TjroDvwkHZwrVLLivPIW","gbJDpJyuALCWgrAofzCZM48MQzuYMmJk4IH12GyqOEexHZFmqq"
 api = tweepy.API(auth, wait_on_rate_limit=True, wait_on_rate_limit_notify=True, compression=True)
 
 fin = open(sys.argv[1], "rt")
