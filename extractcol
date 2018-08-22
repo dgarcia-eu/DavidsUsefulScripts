@@ -1,0 +1,3 @@
+#!/bin/bash
+
+awk -F',' -v colv=\"$1\" 'NR==1{for(i=1;i<=NF;i++){if($i==colv){c=i;break}} print $c} NR>1{print $c}' "$2" > "$2_$1
