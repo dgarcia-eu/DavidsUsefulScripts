@@ -1,3 +1,12 @@
 #!/bin/bash
 
-awk -F',' -v colv=\"$1\" 'NR==1{for(i=1;i<=NF;i++){if($i==colv){c=i;break}} print $c} NR>1{print $c}' "$2" > "$2_$1
+#The awk approach runs into problems if there are commas in fields
+#One solution: Set a more sophisticated field definer, e.g.
+#awk -v colv=\"$1\" 'BEGIN{FPAT = "([^,]+)|(\"[^\"]+\")"}NR==1{for(i=1;i<=NF;i++){if($i==colv){c=i;break}} print $c} NR>1{print $c}' "$2" > "$2_$1
+#But this one doesn't solve the connected problem of quotes in quotes
+
+#This approach is still working well for csv filled with integer or float values (just don't use it on text)
+#awk -F',' -v colv=\"$1\" 'NR==1{for(i=1;i<=NF;i++){if($i==colv){c=i;break}} print $c} NR>1{print $c}' "$2" > "$2_$1
+
+#A general, simple solution: install csvtool (sudo apt install csvtool)
+csvtool namedcol $1 $2 > $2_$1
