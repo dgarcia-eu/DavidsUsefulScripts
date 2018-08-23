@@ -1,0 +1,9 @@
+#!/bin/bash
+
+new=$(wc -l $1 | awk -F" " '{print $1}')
+
+original=$(wc -l $2 | awk -F" " '{print $1}')
+
+diff=$(($original-$new))
+
+echo $diff
