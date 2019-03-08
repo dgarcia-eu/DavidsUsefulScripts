@@ -21,8 +21,7 @@ foutname = sys.argv[2]
 
 
 # Construct the API instance
-api = tweepy.API(auth,wait_on_rate_limit=True)
-
+api = tweepy.API(auth, wait_on_rate_limit=True)
 
 
 with open(finname, "rt") as fin:
@@ -34,9 +33,9 @@ with open(finname, "rt") as fin:
                         if len(linebuffer)==100:
                                 statuses = None
                                 try:
-                                        statuses = api.statuses_lookup(linebuffer)
+                                        statuses = api.statuses_lookup(linebuffer,tweet_mode='extended')
                                 except tweepy.TweepError as e:
-                                        print e
+                                        print(e)
                                         statuses = None
                                 if statuses != None:
                                         for status in statuses:
@@ -48,10 +47,10 @@ with open(finname, "rt") as fin:
                         statuses = None
 
                         try:
-                                statuses = api.statuses_lookup(linebuffer)
+                                statuses = api.statuses_lookup(linebuffer,tweet_mode='extended')
                         except tweepy.TweepError:
                                 statuses = None
                         if statuses != None:
                                 for status in statuses:
                                         fout.write(json.dumps(status._json) + "\n")
-
+ 
