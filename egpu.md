@@ -28,6 +28,25 @@ How to get an external GPU (Nvidia GeForce GTX 1080 in an Akitio Node case) on T
 
 * Install docker: https://docs.docker.com/install/linux/docker-ce/ubuntu/
 
+* Post-installation steps for docker
+       
+      #Create the docker group
+      
+      sudo groupadd docker
+      
+      #Add your user to the docker group
+      
+      sudo usermod -aG docker $USER
+      
+      #Restart
+      
+      reboot
+      
+      #Verify that you can run docker commands without sudo
+      
+      docker run hello-world
+
+
 * Install nvidia docker support: https://github.com/NVIDIA/nvidia-docker
 
 * Verify
@@ -43,8 +62,9 @@ How to get an external GPU (Nvidia GeForce GTX 1080 in an Akitio Node case) on T
 
 * Run (or first time install) tensorflow with gpu support:
 
-      sudo docker run --gpus all -it --rm tensorflow/tensorflow:latest-gpu 
+      docker run --gpus all -it --rm tensorflow/tensorflow:latest-gpu 
 
 Sources:
 
 * https://www.pugetsystems.com/labs/hpc/How-To-Install-CUDA-10-1-on-Ubuntu-19-04-1405/#Step2)GettheNVIDIAdriverinstalled
+* https://josehoras.github.io/tensorflow-with-gpu-using-docker-and-pycharm/
