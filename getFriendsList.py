@@ -13,11 +13,10 @@ fin = open(sys.argv[1], "rt")
 linebuffer = list()
 for line in fin:
 	uid = int(line.replace("\n",""))
-	time.sleep(10) # some waiting time to try to keep the 100K daily limit of Twitter
 	try:
-		with open(folder+"/"+str(uid)+".json", "wt") as fout:
-			for tweet in tweepy.Cursor(api.user_timeline, id=uid, include_rts=True, exclude_replies=False).items():
-				fout.write(json.dumps(tweet._json) + "\n")
+		with open(folder+"/"+str(uid)+"_friends.txt", "wt") as fout:
+			for friend in tweepy.Cursor(api.friends_ids, id=uid).items():
+				fout.write(str(friend) + "\n")
 	except tweepy.TweepError as e:
 		print(e)
 fin.close()
