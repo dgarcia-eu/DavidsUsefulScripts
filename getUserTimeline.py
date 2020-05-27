@@ -16,7 +16,7 @@ for line in fin:
 	time.sleep(10) # some waiting time to try to keep the 100K daily limit of Twitter
 	try:
 		with open(folder+"/"+str(uid)+".json", "wt") as fout:
-			for tweet in tweepy.Cursor(api.user_timeline, id=uid, include_rts=True, exclude_replies=False).items():
+			for tweet in tweepy.Cursor(api.user_timeline, id=uid, include_rts=True, exclude_replies=False, tweet_mode='extended').items():
 				fout.write(json.dumps(tweet._json) + "\n")
 	except tweepy.TweepError as e:
 		print(e)
